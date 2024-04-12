@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - poetry
+  - python >=3.11
+  - just
+  - pre-commit
