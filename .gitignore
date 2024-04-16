@@ -1,6 +1,7 @@
 config/settings/private.py
 .env
 .trash/
+staticfiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

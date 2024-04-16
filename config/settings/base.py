@@ -11,7 +11,6 @@ APPS_DIR = BASE_DIR / "steamboat"
 # ------------------------------------------------------------------------------
 # OS environment variables take precedence over variables from .env
 env = environ.Env()
-print(BASE_DIR)
 SKIP_DOT_ENV_FILE = env.bool("DJANGO_SKIP_DOT_ENV_FILE", default=False)
 if not SKIP_DOT_ENV_FILE:
     env.read_env(str(BASE_DIR / ".env"))
@@ -52,6 +51,8 @@ CREATE USER steamboat WITH PASSWORD '<PASSWORD>';
 GRANT CREATE ON SCHEMA public TO steamboat;
 GRANT pg_read_all_data TO steamboat;
 GRANT pg_write_all_data TO steamboat;
+GRANT ALL ON DATABASE steamboat TO steamboat;
+ALTER DATABASE steamboat OWNER TO steamboat;
 """
 DATABASES = {
     "default": {
@@ -84,15 +85,19 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    "unfold",
     "django.contrib.admin",
     "django.forms",
+    # django-steamboat apps
+    'sample',
+    'sequence',
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
-    "allauth.mfa",
+    # "allauth.mfa", # can bring this back if we want to use MFA
     "allauth.socialaccount",
     "rest_framework",
     "rest_framework.authtoken",

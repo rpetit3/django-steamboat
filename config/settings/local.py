@@ -12,7 +12,7 @@ SECRET_KEY = env(
     default="Ja0gBg7xRpmVf3uS8uekFPineAvDBbcjJ6Mcgnmydi3n4Rfz0nAKWV9aPfXxdH3t",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]  # noqa: S104
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "steamboat"]  # noqa: S104
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -63,3 +63,14 @@ INSTALLED_APPS += ["django_extensions"]
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+if env("FORCE_SCRIPT_NAME"):
+    FORCE_SCRIPT_NAME = env("FORCE_SCRIPT_NAME")
+
+if env("STATIC_URL"):
+    STATIC_URL = env("STATIC_URL")
+
+if env("WHITENOISE_STATIC_PREFIX"):
+    WHITENOISE_STATIC_PREFIX = env("WHITENOISE_STATIC_PREFIX")
+
+if env("CSRF_TRUSTED_ORIGINS"):
+    CSRF_TRUSTED_ORIGINS = [env("CSRF_TRUSTED_ORIGINS")]
